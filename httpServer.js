@@ -32,8 +32,6 @@ fs.readFile('pets.json', 'utf-8', (error, data) => {
 })
 })
 
-
-
 server.listen(port, (error) => {
     if (error){
     console.error('error')
