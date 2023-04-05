@@ -8,18 +8,18 @@ Content-Type: application/json
 {
     "age": 7,
     "kind": "rainbow",
-    "name": "bozo"
+    "name": "test"
   }
 
 ###
 PUT http://localhost:8000/pets/2
 Content-Type: application/json
 
- {
-    "age": 15,
-    "kind": "baboon",
-    "name": "bozo"
-  } 
+{
+    "age": 7,
+    "kind": "this changed",
+    "name": "test"
+  }
 
 ###
-DELETE http://localhost:8000/pets/2
+DELETE http://localhost:8000/pets/3
