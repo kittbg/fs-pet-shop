@@ -12,6 +12,14 @@ Content-Type: application/json
   }
 
 ###
+PATCH http://localhost:8000/pets/1
+Content-Type: application/json
+
+{
+    "name": "test"
+  }
+
+###
 PUT http://localhost:8000/pets/2
 Content-Type: application/json
 

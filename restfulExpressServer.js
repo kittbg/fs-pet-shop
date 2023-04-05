@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import pg from 'pg';
 import express from 'express';
-import fs from 'fs';
+
 dotenv.config();
 const app = express();
 app.use(express.static('public'));
@@ -29,7 +29,7 @@ app.get('/pets/:petID', async (req, res) => {
         if (result.rows.length === 0) {
             res.status(404).send(`Pet with ID ${petID} not found`);
           } else {
-            res.json(result.rows);
+            res.send(result.rows);
           }
         } catch (error) {
         res.status(500).send('Error reading pets database');
@@ -49,18 +49,21 @@ app.post('/pets', async (req, res) => {
     }     
 })
         
-app.put('/pets/:petID', async (req, res)=> {
-    const petID = req.params.petID
-    let name = req.body.name;
-    let age = req.body.age
-    let kind = req.body.kind;
+app.patch('/pets/:petID', async (req, res)=> {
+   const petID = req.params.petID
+   const key = Object.keys(req.body)[0];
+   const value = Object.values(req.body)[0];
     try {
-        await pool.query('UPDATE pets SET name=$1, age=$2, kind=$3 WHERE id=$4', [name, age, kind, petID]);
-        res.send('Pet added successfully');
-    } catch (error) {
-        res.status(400).send("Wrong again!");
-    }     
-})
+        const result = await pool.query(`UPDATE pets SET ${key} = $1 WHERE id = $2`, [value, petID]);
+        if (result.rowCount === 0) {
+            res.status(404).send(`Pet with ID ${petID} not found`);
+          } else {
+            res.send(result.rows);
+          }
+        } catch (error) {
+        res.status(500).send('Error reading pets database');
+        }
+    }) 
        
 app.delete('/pets/:petID', async (req, res) => {
       const petID = req.params.petID;
