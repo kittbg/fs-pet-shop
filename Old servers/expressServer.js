@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const port = process.env.PORT || 3000;
+app.use(express.json());
 
 fs.readFile('pets.json', 'utf-8',(error, data)=> {
 let pets = JSON.parse(data);

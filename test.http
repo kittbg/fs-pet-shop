@@ -1,14 +1,25 @@
 ###
-GET http://localhost:3000/pets
+GET http://localhost:8000/pets
 
 ###
-GET http://localhost:3000/pets/0
+POST http://localhost:8000/pets
+Content-Type: application/json
+
+{
+    "age": 7,
+    "kind": "rainbow",
+    "name": "bozo"
+  }
 
 ###
-GET http://localhost:3000/pets/1
+PUT http://localhost:8000/pets/2
+Content-Type: application/json
+
+ {
+    "age": 15,
+    "kind": "baboon",
+    "name": "bozo"
+  } 
 
 ###
-GET http://localhost:3000/pets/2
-
-###
-GET http://localhost:3000/pets/-1
+DELETE http://localhost:8000/pets/2
